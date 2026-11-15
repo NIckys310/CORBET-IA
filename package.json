@@ -1,0 +1,18 @@
+{
+  "name": "corbet-ia",
+  "version": "0.1.0",
+  "description": "CORBET-IA: asistente conversacional con IA basado en Claude",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": { "node": ">=20" },
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.8.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2"
+  }
+}

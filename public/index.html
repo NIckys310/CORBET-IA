@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CORBET-IA</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <div class="brand"><span class="logo">C</span> CORBET-IA</div>
+      <button id="reset" class="ghost" type="button">Nueva conversación</button>
+    </header>
+
+    <main id="chat" class="chat" aria-live="polite">
+      <div class="empty" id="empty">
+        <h1>Hola, soy CORBET-IA</h1>
+        <p>¿En qué te puedo ayudar hoy?</p>
+      </div>
+    </main>
+
+    <form id="form" class="composer">
+      <textarea id="input" rows="1" placeholder="Escribe tu mensaje…" autocomplete="off"></textarea>
+      <button id="send" type="submit">Enviar</button>
+    </form>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
