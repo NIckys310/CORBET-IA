@@ -1,21 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="CORBET-IA">
-  <defs>
-    <linearGradient id="cb-bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#062A74"/>
-      <stop offset="1" stop-color="#0A4DCC"/>
-    </linearGradient>
-    <linearGradient id="cb-sail" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#FFFFFF"/>
-      <stop offset="1" stop-color="#CFE0FF"/>
-    </linearGradient>
-  </defs>
-  <!-- Burbuja de chat (asistente) -->
-  <path d="M14 4h36a10 10 0 0 1 10 10v28a10 10 0 0 1-10 10H30l-10 8v-8h-6A10 10 0 0 1 4 42V14A10 10 0 0 1 14 4z" fill="url(#cb-bg)"/>
-  <!-- Vela en forma de C (corbeta) -->
-  <path d="M33 12c-9.5 1.6-16 8.4-16 16.5S23.5 43.4 33 45V12z" fill="url(#cb-sail)"/>
-  <path d="M36 18v27c5.6-1 9.5-3.6 11.5-7H36z" fill="#FFFFFF" opacity=".55"/>
-  <!-- Casco -->
-  <path d="M15 47.5h33l-3.5 3.5H18.5z" fill="#FFFFFF" opacity=".9"/>
-  <!-- Destello IA -->
-  <path d="M47 9.5l1.6 4.2 4.2 1.6-4.2 1.6L47 21.1l-1.6-4.2-4.2-1.6 4.2-1.6z" fill="#FF6A13"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 -30 216 182" role="img" aria-label="CORBET-IA">
+  <!-- Barco de papel CORBET-IA (diseño original). Versión para fondos claros. -->
+  <path d="M42 82 L100 4 L100 82 Z" fill="#FF6B0A"/>
+  <path d="M100 4 L100 82 L78 82 Z" fill="#fff" opacity=".16"/>
+  <path d="M100 4 L158 82 L100 82 Z" fill="#3FD9C4"/>
+  <path d="M100 4 L158 82 L132 82 Z" fill="#000" opacity=".07"/>
+  <path d="M0 82 H200 L166 126 H34 Z" fill="#0B1F8F"/>
+  <path d="M0 82 L34 126 L52 82 Z" fill="#000" opacity=".2"/>
+  <path d="M200 82 L166 126 L148 82 Z" fill="#000" opacity=".2"/>
+  <path d="M70 100 L100 116 L130 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" opacity=".35"/>
+  <path d="M18 142 q 14 -9 28 0 t 28 0 t 28 0 t 28 0 t 28 0 t 28 0" fill="none" stroke="#3FD9C4" stroke-width="6" stroke-linecap="round"/>
+  <path d="M100 -24 L104.5 -10.5 L118 -6 L104.5 -1.5 L100 12 L95.5 -1.5 L82 -6 L95.5 -10.5 Z" fill="#FF6B0A"/>
 </svg>

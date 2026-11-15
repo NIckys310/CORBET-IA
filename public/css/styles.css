@@ -896,3 +896,32 @@ body[data-rol="admin"] .vista[data-vista="admin"] .tabs { display: none; } /* la
   .hero__contenido h1 { font-size: 46px; }
   .msg { max-width: 90%; }
 }
+
+/* =====================================================================
+   Logo CORBET-IA (opción 9 mejorada): barco de papel + CORBET + cápsula IA
+   ===================================================================== */
+.marca { gap: 14px; }
+.marca img { width: 46px; height: auto; }
+.logo-blanco { display: none; }
+:root[data-theme="dark"] .marca .logo-color, body[data-rol="admin"] .marca .logo-color { display: none; }
+:root[data-theme="dark"] .marca .logo-blanco, body[data-rol="admin"] .marca .logo-blanco { display: block; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .marca .logo-color { display: none; }
+  :root:not([data-theme="light"]) .marca .logo-blanco { display: block; }
+}
+.marca__nombre {
+  font-family: "Montserrat", var(--texto-fam); font-weight: 600; font-size: 21px; letter-spacing: .16em;
+  color: var(--azul); display: inline-flex; align-items: center;
+}
+:root[data-theme="dark"] .marca__nombre { color: #fff; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .marca__nombre { color: #fff; } }
+.marca__ia {
+  position: relative; margin-left: 8px; padding: 2px 13px 2px 9px; border-radius: 999px; vertical-align: 0;
+  background: var(--naranja); color: #fff; font-family: "Montserrat", var(--texto-fam); font-size: .78em; font-weight: 600;
+  letter-spacing: .02em; line-height: 1.35; box-shadow: 0 6px 16px rgba(255, 107, 10, .3);
+}
+.marca__ia::after { content: "✦"; position: absolute; top: -1px; right: 4px; font-size: .5em; }
+.marca__lema { font-family: var(--texto-fam); font-weight: 700; font-size: 9.5px; letter-spacing: .28em; color: var(--suave); margin-top: 4px; }
+.titulo-display .marca__ia, .login__marca .marca__ia { font-size: .5em; vertical-align: .35em; }
+.login__marca h2 { font-family: "Montserrat", var(--texto-fam); font-weight: 600; letter-spacing: .14em; font-size: 38px; }
+.pie .marca__nombre { font-size: 18px; }

@@ -1,0 +1,20 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="ola" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3FD9C4"/><stop offset="1" stop-color="#FF6B0A"/></linearGradient>
+    <linearGradient id="azulg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#06135C"/><stop offset="1" stop-color="#1A35C9"/></linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="#FFFFFF"/>
+  
+    <g transform="translate(250 330) scale(1.55)">
+    <path d="M42 82 L100 4 L100 82 Z" fill="#FF6B0A"/>
+    <path d="M100 4 L158 82 L100 82 Z" fill="#3FD9C4"/>
+    <path d="M0 82 H200 L166 126 H34 Z" fill="#0B1F8F"/>
+    <path d="M0 82 L34 126 L52 82 Z" fill="#000" opacity=".18"/>
+    <path d="M200 82 L166 126 L148 82 Z" fill="#000" opacity=".18"/>
+    <path d="M60 104 H140" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity=".45"/>
+  </g>
+    <text x="620" y="470" font-family="Cormorant Garamond" font-weight="700" font-size="150" fill="#0B1F8F" letter-spacing="6">CORBET<tspan dx="18" fill="#FF6B0A">IA</tspan></text>
+    <text x="626" y="535" font-family="Manrope" font-weight="700" font-size="30" fill="#0B1530" letter-spacing="13">ASISTENTE INTELIGENTE</text>
+  <text x="60" y="856" font-family="Manrope" font-weight="500" font-size="22" fill="#6B7390" letter-spacing="1">Opción 1 · Horizontal: serif elegante, «IA» en naranja y lema espaciado</text>
+</svg>

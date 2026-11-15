@@ -1,0 +1,23 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="ola" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3FD9C4"/><stop offset="1" stop-color="#FF6B0A"/></linearGradient>
+    <linearGradient id="azulg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#06135C"/><stop offset="1" stop-color="#1A35C9"/></linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="#FFFFFF"/>
+  
+    <rect x="660" y="110" width="280" height="280" rx="64" fill="url(#azulg)"/>
+    <g transform="translate(690 175) scale(1.1)">
+    <path d="M42 82 L100 4 L100 82 Z" fill="#FF6B0A"/>
+    <path d="M100 4 L158 82 L100 82 Z" fill="#3FD9C4"/>
+    <path d="M0 82 H200 L166 126 H34 Z" fill="#FFFFFF"/>
+    <path d="M0 82 L34 126 L52 82 Z" fill="#000" opacity=".18"/>
+    <path d="M200 82 L166 126 L148 82 Z" fill="#000" opacity=".18"/>
+    <path d="M60 104 H140" stroke="#0B1F8F" stroke-width="2.5" stroke-linecap="round" opacity=".45"/>
+  </g>
+    <path d="M890 149 L894.48 160.52 L906 165 L894.48 169.48 L890 181 L885.52 169.48 L874 165 L885.52 160.52 Z" fill="#FF6B0A"/>
+    <text x="800" y="545" text-anchor="middle" font-family="Cormorant Garamond" font-weight="700" font-size="120" fill="#0B1F8F" letter-spacing="8">CORBET<tspan fill="#FF6B0A">·IA</tspan></text>
+    <path d="M560 585 Q 800 640 1040 585" fill="none" stroke="#3FD9C4" stroke-width="5" stroke-linecap="round"/>
+    <text x="800" y="680" text-anchor="middle" font-family="Manrope" font-weight="700" font-size="26" fill="#6B7390" letter-spacing="12">ASISTENTE INTELIGENTE</text>
+  <text x="60" y="856" font-family="Manrope" font-weight="500" font-size="22" fill="#6B7390" letter-spacing="1">Opción 10 · Vertical con ícono de app redondeado (favicon, móvil, redes)</text>
+</svg>
