@@ -10,21 +10,67 @@
   <div class="app">
     <header class="top">
       <div class="brand"><span class="logo">C</span> CORBET-IA</div>
-      <button id="reset" class="ghost" type="button">Nueva conversación</button>
+      <nav class="tabs" role="tablist">
+        <button class="tab active" data-view="chat" role="tab" type="button">Asistente</button>
+        <button class="tab" data-view="productos" role="tab" type="button">Productos</button>
+      </nav>
+      <span id="fuente" class="pill demo" title="Origen de los productos">Datos demo</span>
     </header>
 
-    <main id="chat" class="chat" aria-live="polite">
-      <div class="empty" id="empty">
-        <h1>Hola, soy CORBET-IA</h1>
-        <p>¿En qué te puedo ayudar hoy?</p>
-      </div>
-    </main>
+    <!-- ===== Vista: Asistente ===== -->
+    <section id="view-chat" class="view">
+      <main id="chat" class="chat" aria-live="polite">
+        <div class="empty" id="empty">
+          <h1>Hola, soy CORBET-IA</h1>
+          <p>Pregúntame por productos, precios, stock o pídeme una recomendación.</p>
+          <div class="sugerencias">
+            <button type="button" class="chip">¿Qué televisores tienen?</button>
+            <button type="button" class="chip">Recomiéndame un portátil para estudiar</button>
+            <button type="button" class="chip">¿Qué productos están agotados?</button>
+          </div>
+        </div>
+      </main>
+      <form id="form" class="composer">
+        <button id="reset" class="ghost" type="button" title="Nueva conversación">↺</button>
+        <textarea id="input" rows="1" placeholder="Escribe tu mensaje…" autocomplete="off"></textarea>
+        <button id="send" type="submit">Enviar</button>
+      </form>
+    </section>
 
-    <form id="form" class="composer">
-      <textarea id="input" rows="1" placeholder="Escribe tu mensaje…" autocomplete="off"></textarea>
-      <button id="send" type="submit">Enviar</button>
-    </form>
+    <!-- ===== Vista: Productos ===== -->
+    <section id="view-productos" class="view" hidden>
+      <div class="toolbar">
+        <input id="buscar" type="search" placeholder="Buscar por nombre, marca o SKU…" />
+        <select id="categoria"><option value="">Todas las categorías</option></select>
+        <button id="abrir-conexion" type="button">🔌 Conectar base de datos</button>
+      </div>
+      <p id="estado-productos" class="estado"></p>
+      <div id="grid" class="grid"></div>
+    </section>
   </div>
+
+  <!-- ===== Diálogo: conectar base de datos ===== -->
+  <dialog id="dlg-conexion">
+    <form id="form-conexion" method="dialog">
+      <h2>Conectar base de datos de productos</h2>
+      <p class="muted">Pega la URL de la API que devuelve los productos en JSON. Se aceptan listas directas o los campos <code>productos</code>, <code>products</code>, <code>items</code> o <code>data</code>.</p>
+      <label>URL de la API
+        <input id="db-url" type="url" placeholder="https://api.tu-empresa.com/productos" required />
+      </label>
+      <label>Token / API key <span class="muted">(opcional, se envía como Bearer)</span>
+        <input id="db-key" type="password" autocomplete="off" />
+      </label>
+      <p class="muted small">¿Solo quieres probar? Usa <button type="button" id="usar-ejemplo" class="link">una API pública de ejemplo</button>.</p>
+      <p id="db-resultado" class="resultado" role="status"></p>
+      <div class="acciones">
+        <button type="button" id="usar-demo" class="ghost">Volver a datos demo</button>
+        <span class="spacer"></span>
+        <button type="button" id="cancelar" class="ghost">Cancelar</button>
+        <button type="submit" id="conectar">Probar y conectar</button>
+      </div>
+    </form>
+  </dialog>
+
   <script src="app.js"></script>
 </body>
 </html>

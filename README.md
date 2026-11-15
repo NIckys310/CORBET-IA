@@ -25,9 +25,18 @@ Abre http://localhost:3000 en el navegador.
 |-----------|--------------------------------|----------------|
 | Frontend  | `public/` (HTML, CSS, JS)      | `/`            |
 | Backend   | `lib/backend.js`, `api/backend.js` | `/api/backend` (estado del servicio) |
+| Productos | `lib/productos.js`, `lib/catalogo-demo.js`, `api/productos.js` | `/api/productos` (GET catálogo, POST conectar BD) |
 | IA        | `lib/ia.js`, `api/ia.js`       | `/api/ia` (GET info, POST chat en streaming) |
 
 `dev-server.js` es el servidor local (Express). En Vercel, `public/` se sirve como sitio estático y `api/` como funciones serverless.
+
+## Productos y base de datos
+
+La pestaña **Productos** muestra el catálogo. Mientras no haya base de datos conectada se usa un catálogo de demostración (`lib/catalogo-demo.js`).
+
+El botón **Conectar base de datos** acepta la URL de cualquier API que devuelva productos en JSON (lista directa o campos `productos`, `products`, `items`, `data`) y un token opcional que se envía como `Authorization: Bearer`. Los campos se normalizan automáticamente (`nombre/name/title`, `precio/price`, `stock/existencias`, etc.). La IA usa el catálogo activo para responder.
+
+También se puede fijar en el servidor con `CORBETA_DB_URL` y `CORBETA_DB_KEY`.
 
 ## Despliegue en Vercel
 
