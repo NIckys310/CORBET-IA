@@ -6,6 +6,7 @@ import express from "express";
 import { iaHandler } from "./lib/ia.js";
 import { backendHandler } from "./lib/backend.js";
 import { productosHandler } from "./lib/productos.js";
+import { sucursalesHandler } from "./lib/sucursales.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,6 +16,7 @@ app.use(express.static(fileURLToPath(new URL("./public", import.meta.url))));
 app.get("/api/backend", backendHandler);
 app.all("/api/ia", iaHandler);
 app.all("/api/productos", productosHandler);
+app.get("/api/sucursales", sucursalesHandler);
 
 app.listen(PORT, () => {
   console.log(`CORBET-IA en http://localhost:${PORT}`);

@@ -26,9 +26,18 @@ Abre http://localhost:3000 en el navegador.
 | Frontend  | `public/` (HTML, CSS, JS)      | `/`            |
 | Backend   | `lib/backend.js`, `api/backend.js` | `/api/backend` (estado del servicio) |
 | Productos | `lib/productos.js`, `lib/catalogo-demo.js`, `api/productos.js` | `/api/productos` (GET catálogo, POST conectar BD) |
+| Sucursales | `lib/sucursales.js`, `api/sucursales.js` | `/api/sucursales` |
 | IA        | `lib/ia.js`, `api/ia.js`       | `/api/ia` (GET info, POST chat en streaming) |
 
 `dev-server.js` es el servidor local (Express). En Vercel, `public/` se sirve como sitio estático y `api/` como funciones serverless.
+
+## Secciones de la web
+
+- **Inicio**: presentación, categorías y productos destacados.
+- **Productos**: catálogo por categorías, búsqueda, orden y botón para conectar la base de datos.
+- **Asistente IA**: chat de productos.
+- **Sucursales**: tiendas de Corbeta / Alkosto y un chat de IA para preguntar dónde, horarios y cómo llegar. Las direcciones no verificadas se marcan "Por confirmar" (editar en `lib/sucursales.js`).
+- Barra superior: idioma (ES/EN), tema claro/oscuro, cuenta (versión de prueba guardada en el navegador) y carrito.
 
 ## Productos y base de datos
 
