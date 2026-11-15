@@ -33,11 +33,15 @@ Abre http://localhost:3000 en el navegador.
 
 ## Secciones de la web
 
-- **Inicio**: presentación, categorías y productos destacados.
-- **Productos**: catálogo por categorías, búsqueda, orden y botón para conectar la base de datos.
-- **Asistente IA**: chat de productos.
-- **Sucursales**: tiendas de Corbeta / Alkosto y un chat de IA para preguntar dónde, horarios y cómo llegar. Las direcciones no verificadas se marcan "Por confirmar" (editar en `lib/sucursales.js`).
-- Barra superior: idioma (ES/EN), tema claro/oscuro, cuenta (versión de prueba guardada en el navegador) y carrito.
+1. **Inicio**: banner principal con promociones destacadas, accesos al sistema, destacados, banda de oferta, categorías y recomendaciones.
+2. **Catálogo**: productos con filtros por categoría, marca, rango de precio, descuento y disponibilidad; orden y conexión a base de datos.
+3. **Promociones**: descuentos vigentes (cuenta regresiva), próximas ofertas (recordatorio) y promociones por categoría.
+4. **Asistente**: chat con IA (modo productos / consultas comerciales) y recomendaciones.
+5. **Sucursales**: mapa (Leaflet + OpenStreetMap), listado filtrable y chat de IA para dónde, horarios y cómo llegar.
+6. **Administración**: dashboard con KPIs y gráficas de ventas (demo), gestión de productos, descuentos y configuración.
+
+Barra superior: idioma ES/EN, tema claro/oscuro, cuenta y carrito. Frontend organizado en módulos (`public/js/`).
+Las fotos son imágenes de referencia de Wikimedia Commons con licencia libre (créditos en el pie de página, `lib/fotos.json`).
 
 ## Productos y base de datos
 
