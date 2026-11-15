@@ -78,6 +78,9 @@ export function productos() {
       const e = a.editados[p.sku];
       const r = e ? { ...p, ...e } : { ...p };
       r.descuento = Number(r.descuento) || 0;
+      // Una oferta vencida deja de aplicar.
+      if (r.hasta && new Date(r.hasta) < new Date()) r.descuento = 0;
+      if (!r.descuento) r.hasta = null;
       // Si cambió el descuento, el precio anterior se recalcula desde el precio final.
       r.precioAntes = r.descuento > 0 && r.precio ? Math.round(r.precio / (1 - r.descuento / 100) / 100) * 100 : null;
       return r;
@@ -200,14 +203,33 @@ export function etiquetaStock(stock) {
   return `<span class="stock stock--ok">${t("comun.disponible")}</span>`;
 }
 
+// "6 de diciembre" / "December 6" (en la zona horaria de Colombia).
+export function fechaOferta(iso, { conDia = false } = {}) {
+  return new Intl.DateTimeFormat(estado.idioma === "en" ? "en-US" : "es-CO", {
+    day: "numeric", month: "long", ...(conDia ? { weekday: "long" } : {}), timeZone: "America/Bogota",
+  }).format(new Date(iso));
+}
+export const ahorro = (p) => (p.precioAntes && p.precio ? p.precioAntes - p.precio : 0);
+export const terminaPronto = (iso) => iso && new Date(iso) - Date.now() < 72 * 36e5;
+
+// Línea "Oferta válida hasta el 6 de diciembre" (con cuenta regresiva si quedan menos de 3 días).
+export function lineaVigencia(p) {
+  if (!p.descuento || !p.hasta) return "";
+  return terminaPronto(p.hasta)
+    ? `<span class="vigencia vigencia--urgente">⏳ ${t("oferta.terminaEn")} <strong data-cuenta="${p.hasta}">${cuentaRegresiva(p.hasta)}</strong></span>`
+    : `<span class="vigencia">${t("oferta.hasta", { f: fechaOferta(p.hasta) })}</span>`;
+}
+
 export function tarjetaProducto(p, { compacta = false } = {}) {
   const agotado = p.stock != null && p.stock <= 0;
   const tono = tonoCategoria(p.categoria);
+  const grande = p.descuento >= 40;
   return `
-    <article class="producto revelar ${compacta ? "producto--compacta" : ""}" style="--tono:${tono.tono}">
+    <article class="producto revelar ${compacta ? "producto--compacta" : ""} ${p.descuento ? "producto--oferta" : ""}" style="--tono:${tono.tono}">
       <div class="producto__media">
         ${imagenProducto(p)}
-        ${p.descuento ? `<span class="producto__desc">−${p.descuento}%</span>` : ""}
+        ${p.descuento ? `<span class="producto__desc ${grande ? "producto__desc--grande" : ""}"><small>${t("oferta.dcto")}</small>−${p.descuento}%</span>` : ""}
+        ${p.descuento && p.hasta && terminaPronto(p.hasta) ? `<span class="producto__flash">⚡ ${t("oferta.ultimas")}</span>` : ""}
       </div>
       <div class="producto__cuerpo">
         <span class="producto__cat">${escapar(nombreCategoria(p.categoria))} · ${escapar(p.marca)}</span>
@@ -216,6 +238,8 @@ export function tarjetaProducto(p, { compacta = false } = {}) {
           <span class="producto__precio">${precio(p.precio)}</span>
           ${p.precioAntes ? `<span class="producto__antes">${precio(p.precioAntes)}</span>` : ""}
         </div>
+        ${ahorro(p) ? `<span class="producto__ahorro">${t("oferta.ahorras", { v: precio(ahorro(p)) })}</span>` : ""}
+        ${lineaVigencia(p)}
         <div class="producto__pie">
           ${etiquetaStock(p.stock)}
           <span class="producto__acciones">
@@ -225,6 +249,41 @@ export function tarjetaProducto(p, { compacta = false } = {}) {
         </div>
       </div>
     </article>`;
+}
+
+// Oferta detallada: "Televisor Samsung 55" … con 50% de descuento hasta el 6 de diciembre."
+export function filaOferta(p) {
+  const tono = tonoCategoria(p.categoria);
+  return `
+    <article class="oferta revelar" style="--tono:${tono.tono}">
+      <div class="oferta__media">${imagenProducto(p)}</div>
+      <div class="oferta__info">
+        <span class="producto__cat">${escapar(nombreCategoria(p.categoria))} · ${escapar(p.marca)}</span>
+        <h3>${escapar(t("oferta.frase", { n: p.nombre, d: p.descuento, f: p.hasta ? fechaOferta(p.hasta, { conDia: true }) : "—" }))}</h3>
+        <p class="oferta__precios">${t("oferta.antesAhora", { a: `<s>${precio(p.precioAntes)}</s>`, b: `<strong>${precio(p.precio)}</strong>` })}</p>
+        <div class="oferta__pie">
+          <span class="producto__ahorro">${t("oferta.ahorras", { v: precio(ahorro(p)) })}</span>
+          ${p.hasta ? `<span class="vigencia ${terminaPronto(p.hasta) ? "vigencia--urgente" : ""}">⏳ ${t("oferta.terminaEn")} <strong data-cuenta="${p.hasta}">${cuentaRegresiva(p.hasta)}</strong></span>` : ""}
+        </div>
+      </div>
+      <div class="oferta__lado">
+        <span class="oferta__pct"><small>${t("oferta.dcto")}</small>${p.descuento}%</span>
+        <button type="button" class="btn btn--naranja btn--sm" data-agregar="${escapar(p.sku)}" ${p.stock === 0 ? "disabled" : ""}>${t("ofertas.comprar")}</button>
+      </div>
+    </article>`;
+}
+
+export const productosEnOferta = () =>
+  productos().filter((p) => p.descuento > 0).sort((a, b) => b.descuento - a.descuento || new Date(a.hasta ?? 0) - new Date(b.hasta ?? 0));
+
+// Cinta animada con las ofertas (debajo de la cabecera).
+export function pintarTicker() {
+  const ofertas = productosEnOferta();
+  const items = ofertas.map((p) => `<span>${escapar(t("ofertas.ticker", {
+    n: p.nombre.split(" ").slice(0, 5).join(" "), d: p.descuento, f: p.hasta ? fechaOferta(p.hasta) : "—" }))}</span>`).join("<i>✦</i>");
+  // Se duplica el contenido para que el desplazamiento sea continuo.
+  $("#ticker").innerHTML = items ? `<div class="ticker__grupo">${items}<i>✦</i></div><div class="ticker__grupo" aria-hidden="true">${items}<i>✦</i></div>` : "";
+  $("#ticker").parentElement.hidden = !items;
 }
 
 // Registra la categoría vista (para "Recomendado para ti").

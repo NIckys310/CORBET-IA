@@ -20,6 +20,8 @@
   </script>
 </head>
 <body>
+  <div class="fondo-vivo" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div id="progreso" class="progreso" aria-hidden="true"></div>
   <!-- ================= Cabecera ================= -->
   <div class="franja"><span id="franja-texto"></span></div>
   <header class="cabecera">
@@ -61,6 +63,7 @@
       </div>
     </div>
   </header>
+  <div class="ticker" aria-label="Ofertas"><div id="ticker" class="ticker__pista"></div></div>
 
   <main>
     <!-- ======================= 1. INICIO ======================= -->
@@ -74,6 +77,17 @@
             <button id="hero-next" type="button" aria-label="Siguiente">→</button>
           </div>
         </div>
+      </div>
+
+      <div class="contenedor bloque">
+        <header class="bloque__cabeza">
+          <div>
+            <span id="inicio-ofertas-contador" class="sobretitulo"></span>
+            <h2 class="titulo-display" data-i18n="ofertas.titulo"></h2><p data-i18n="ofertas.sub"></p>
+          </div>
+          <a href="#promociones" class="enlace-flecha" data-i18n="comun.verTodo"></a>
+        </header>
+        <div id="inicio-ofertas" class="ofertas"></div>
       </div>
 
       <div class="contenedor bloque">
@@ -184,6 +198,9 @@
 
         <h2 class="subtitulo" data-i18n="promo.vigentes"></h2>
         <div id="promo-vigentes" class="promos"></div>
+
+        <h2 class="subtitulo" data-i18n="ofertas.titulo"></h2>
+        <div id="promo-ofertas" class="ofertas"></div>
 
         <h2 class="subtitulo" data-i18n="promo.proximas"></h2>
         <div id="promo-proximas" class="proximas"></div>
@@ -344,7 +361,7 @@
             <table class="tabla tabla--admin">
               <thead><tr>
                 <th data-i18n="adm.p.producto"></th><th data-i18n="adm.p.categoria"></th><th data-i18n="adm.p.precio"></th>
-                <th data-i18n="adm.p.desc"></th><th data-i18n="adm.p.stock"></th><th></th>
+                <th data-i18n="adm.p.desc"></th><th data-i18n="adm.p.stock"></th><th data-i18n="adm.p.hasta"></th><th></th>
               </tr></thead>
               <tbody id="adm-tabla"></tbody>
             </table>

@@ -5,7 +5,7 @@ export const TEXTOS = {
     "nav.inicio": "Inicio", "nav.catalogo": "Catálogo", "nav.promociones": "Promociones",
     "nav.asistente": "Asistente", "nav.sucursales": "Sucursales", "nav.admin": "Administración",
     "top.tema": "Cambiar tema", "top.idioma": "Cambiar idioma", "top.ingresar": "Ingresar", "top.carrito": "Carrito",
-    "top.franja": "Envíos a todo el país · Promociones de hasta 40% · Asesoría con inteligencia artificial",
+    "top.franja": "Envíos a todo el país · Promociones de hasta 55% · Asesoría con inteligencia artificial",
     "marca.lema": "Asistente inteligente",
 
     // Comunes
@@ -15,6 +15,15 @@ export const TEXTOS = {
     "comun.terminaEn": "Termina en", "comun.empiezaEn": "Empieza en", "comun.hasta": "Hasta {n}% OFF",
     "comun.productos": "{n} productos", "comun.demo": "Datos de demostración",
     "comun.guardar": "Guardar", "comun.cancelar": "Cancelar", "comun.eliminar": "Eliminar", "comun.cerrar": "Cerrar",
+
+    // Ofertas
+    "oferta.dcto": "Dcto.", "oferta.ultimas": "Últimas horas", "oferta.ahorras": "Ahorras {v}",
+    "oferta.hasta": "Oferta válida hasta el {f}", "oferta.terminaEn": "Termina en",
+    "oferta.frase": "{n} con {d}% de descuento hasta el {f}.",
+    "oferta.antesAhora": "Antes {a} · Ahora {b}",
+    "ofertas.titulo": "Ofertas de la temporada", "ofertas.sub": "Descuentos detallados por producto, con su fecha límite.",
+    "ofertas.comprar": "Comprar con descuento", "ofertas.ticker": "{n} −{d}% hasta el {f}",
+    "ofertas.contador": "{n} productos en oferta · ahorra hasta {d}%",
 
     // Inicio
     "inicio.verPromo": "Ver promoción", "inicio.hablar": "Hablar con el asistente",
@@ -28,7 +37,7 @@ export const TEXTOS = {
     "inicio.destacados": "Destacados", "inicio.destacados.sub": "Selección premium de la semana",
     "inicio.categorias": "Explora por categoría", "inicio.categorias.sub": "Cada sección con su propio estilo",
     "inicio.reco": "Recomendado para ti", "inicio.reco.sub": "Según lo que has visto y agregado",
-    "inicio.banner.etq": "Oferta destacada", "inicio.banner.t": "Hasta 40% en hogar y tecnología",
+    "inicio.banner.etq": "Oferta destacada", "inicio.banner.t": "Hasta 55% en hogar y tecnología",
     "inicio.banner.d": "Precios especiales por tiempo limitado en las mejores marcas.",
     "inicio.banner.cta": "Comprar ahora",
 
@@ -87,7 +96,7 @@ export const TEXTOS = {
     "adm.verTabla": "Ver tabla", "adm.verGrafica": "Ver gráfica",
     "adm.stockBajo": "Alertas de stock", "adm.pedidos": "Pedidos recientes (tienda)", "adm.sinPedidos": "Aún no hay pedidos.",
     "adm.p.buscar": "Buscar producto…", "adm.p.nuevo": "Nuevo producto", "adm.p.producto": "Producto", "adm.p.categoria": "Categoría",
-    "adm.p.precio": "Precio", "adm.p.desc": "Desc. %", "adm.p.stock": "Stock", "adm.p.acciones": "",
+    "adm.p.precio": "Precio", "adm.p.desc": "Desc. %", "adm.p.stock": "Stock", "adm.p.acciones": "", "adm.p.hasta": "Oferta hasta",
     "adm.p.guardado": "Cambios guardados", "adm.p.eliminado": "Producto eliminado", "adm.p.creado": "Producto creado",
     "adm.p.nombre": "Nombre", "adm.p.marca": "Marca", "adm.p.sku": "SKU",
     "adm.d.masivo": "Descuento por categoría", "adm.d.masivoSub": "Aplica el mismo % a todos los productos de una categoría.",
@@ -131,7 +140,7 @@ export const TEXTOS = {
     "nav.inicio": "Home", "nav.catalogo": "Catalog", "nav.promociones": "Deals",
     "nav.asistente": "Assistant", "nav.sucursales": "Stores", "nav.admin": "Admin",
     "top.tema": "Toggle theme", "top.idioma": "Change language", "top.ingresar": "Sign in", "top.carrito": "Cart",
-    "top.franja": "Nationwide shipping · Deals up to 40% off · AI-powered shopping advice",
+    "top.franja": "Nationwide shipping · Deals up to 55% off · AI-powered shopping advice",
     "marca.lema": "Smart assistant",
 
     "comun.verTodo": "View all", "comun.agregar": "Add", "comun.preguntar": "Ask the AI",
@@ -140,6 +149,14 @@ export const TEXTOS = {
     "comun.terminaEn": "Ends in", "comun.empiezaEn": "Starts in", "comun.hasta": "Up to {n}% OFF",
     "comun.productos": "{n} products", "comun.demo": "Demo data",
     "comun.guardar": "Save", "comun.cancelar": "Cancel", "comun.eliminar": "Delete", "comun.cerrar": "Close",
+
+    "oferta.dcto": "Off", "oferta.ultimas": "Final hours", "oferta.ahorras": "You save {v}",
+    "oferta.hasta": "Offer valid until {f}", "oferta.terminaEn": "Ends in",
+    "oferta.frase": "{n} at {d}% off until {f}.",
+    "oferta.antesAhora": "Was {a} · Now {b}",
+    "ofertas.titulo": "Season deals", "ofertas.sub": "Detailed discounts per product, with their end date.",
+    "ofertas.comprar": "Buy at a discount", "ofertas.ticker": "{n} −{d}% until {f}",
+    "ofertas.contador": "{n} products on sale · save up to {d}%",
 
     "inicio.verPromo": "See deal", "inicio.hablar": "Talk to the assistant",
     "inicio.accesos": "Quick access", "inicio.accesos.sub": "All of CORBET-IA in one click",
@@ -152,7 +169,7 @@ export const TEXTOS = {
     "inicio.destacados": "Featured", "inicio.destacados.sub": "This week's premium picks",
     "inicio.categorias": "Shop by category", "inicio.categorias.sub": "Each section with its own style",
     "inicio.reco": "Recommended for you", "inicio.reco.sub": "Based on what you've viewed and added",
-    "inicio.banner.etq": "Featured deal", "inicio.banner.t": "Up to 40% off home & tech",
+    "inicio.banner.etq": "Featured deal", "inicio.banner.t": "Up to 55% off home & tech",
     "inicio.banner.d": "Special prices for a limited time on top brands.",
     "inicio.banner.cta": "Shop now",
 
@@ -206,7 +223,7 @@ export const TEXTOS = {
     "adm.verTabla": "Show table", "adm.verGrafica": "Show chart",
     "adm.stockBajo": "Stock alerts", "adm.pedidos": "Recent orders (store)", "adm.sinPedidos": "No orders yet.",
     "adm.p.buscar": "Search product…", "adm.p.nuevo": "New product", "adm.p.producto": "Product", "adm.p.categoria": "Category",
-    "adm.p.precio": "Price", "adm.p.desc": "Disc. %", "adm.p.stock": "Stock", "adm.p.acciones": "",
+    "adm.p.precio": "Price", "adm.p.desc": "Disc. %", "adm.p.stock": "Stock", "adm.p.acciones": "", "adm.p.hasta": "Offer until",
     "adm.p.guardado": "Changes saved", "adm.p.eliminado": "Product deleted", "adm.p.creado": "Product created",
     "adm.p.nombre": "Name", "adm.p.marca": "Brand", "adm.p.sku": "SKU",
     "adm.d.masivo": "Discount by category", "adm.d.masivoSub": "Apply the same % to every product in a category.",

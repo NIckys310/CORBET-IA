@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="CORBET-IA">
   <defs>
     <linearGradient id="cb-bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0B2A6F"/>
-      <stop offset="1" stop-color="#1F5BFF"/>
+      <stop offset="0" stop-color="#062A74"/>
+      <stop offset="1" stop-color="#0A4DCC"/>
     </linearGradient>
     <linearGradient id="cb-sail" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#FFFFFF"/>
@@ -17,5 +17,5 @@
   <!-- Casco -->
   <path d="M15 47.5h33l-3.5 3.5H18.5z" fill="#FFFFFF" opacity=".9"/>
   <!-- Destello IA -->
-  <path d="M47 9.5l1.6 4.2 4.2 1.6-4.2 1.6L47 21.1l-1.6-4.2-4.2-1.6 4.2-1.6z" fill="#FFC83D"/>
+  <path d="M47 9.5l1.6 4.2 4.2 1.6-4.2 1.6L47 21.1l-1.6-4.2-4.2-1.6 4.2-1.6z" fill="#FF6A13"/>
 </svg>

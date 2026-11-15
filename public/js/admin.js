@@ -150,12 +150,22 @@ function pintarTablaProductos() {
       <td><input type="number" min="0" step="100" value="${p.precio ?? ""}" data-campo="precio" aria-label="${t("adm.p.precio")}" /></td>
       <td><input type="number" min="0" max="90" value="${p.descuento || 0}" data-campo="descuento" aria-label="${t("adm.p.desc")}" /></td>
       <td><input type="number" min="0" value="${p.stock ?? ""}" data-campo="stock" aria-label="${t("adm.p.stock")}" /></td>
+      <td><input type="date" value="${p.hasta ? new Date(p.hasta).toLocaleDateString("en-CA", { timeZone: "America/Bogota" }) : ""}" data-campo="hasta" aria-label="${t("adm.p.hasta")}" /></td>
       <td><button type="button" class="btn-icono" data-eliminar title="${t("comun.eliminar")}" aria-label="${t("comun.eliminar")}">✕</button></td>
     </tr>`).join("");
 }
 
 function editarCampo(sku, campo, valor) {
   const a = ajustes();
+  if (campo === "hasta") {
+    // Fecha límite de la oferta (fin del día, hora de Colombia). Vacío = sin fecha.
+    const hasta = valor ? `${valor}T23:59:00-05:00` : "";
+    const nuevo = a.nuevos.find((p) => p.sku === sku);
+    if (nuevo) nuevo.hasta = hasta || null;
+    else a.editados[sku] = { ...(a.editados[sku] ?? {}), hasta: hasta || null };
+    guardarAjustes(a);
+    return toast(t("adm.p.guardado"));
+  }
   const n = valor === "" ? null : Number(valor);
   if (n !== null && !Number.isFinite(n)) return;
   const limpio = campo === "descuento" ? Math.max(0, Math.min(90, n ?? 0)) : Math.max(0, n ?? 0);

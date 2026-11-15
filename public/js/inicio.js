@@ -1,6 +1,6 @@
 // Sección Inicio: banner de promociones, accesos al sistema, destacados, categorías y recomendaciones.
 import { $, t, loc, escapar, al, estado, productos, promocionesVisibles, tarjetaProducto, nombreCategoria, tonoCategoria,
-  imagenProducto, listaCategorias, cuentaRegresiva, revelar, irA } from "./core.js";
+  imagenProducto, listaCategorias, cuentaRegresiva, revelar, irA, filaOferta, productosEnOferta, pintarTicker } from "./core.js";
 import { skusEnCarrito, abrirCuenta } from "./tienda.js";
 import { filtrarCatalogo } from "./catalogo.js";
 
@@ -105,8 +105,17 @@ function pintarProductos() {
   $("#inicio-reco").innerHTML = reco.slice(0, 4).map((p) => tarjetaProducto(p)).join("");
 }
 
+function pintarOfertas() {
+  const ofertas = productosEnOferta();
+  const max = Math.max(0, ...ofertas.map((p) => p.descuento));
+  $("#inicio-ofertas-contador").textContent = t("ofertas.contador", { n: ofertas.length, d: max });
+  $("#inicio-ofertas").innerHTML = ofertas.slice(0, 5).map(filaOferta).join("");
+  pintarTicker();
+}
+
 function pintarTodo() {
   pintarHero();
+  pintarOfertas();
   pintarAccesos();
   pintarCategorias();
   pintarProductos();

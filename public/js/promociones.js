@@ -1,6 +1,6 @@
 // Sección Promociones: descuentos vigentes, próximas ofertas y promociones por categoría.
 import { $, t, loc, escapar, al, almacen, toast, estado, productos, promocionesVisibles, nombreCategoria, tonoCategoria,
-  listaCategorias, imagenProducto, cuentaRegresiva, revelar } from "./core.js";
+  listaCategorias, imagenProducto, cuentaRegresiva, revelar, filaOferta, productosEnOferta } from "./core.js";
 
 const fechaLarga = (iso) =>
   new Intl.DateTimeFormat(estado.idioma === "en" ? "en-US" : "es-CO", { weekday: "long", day: "numeric", month: "long" }).format(new Date(iso));
@@ -38,6 +38,8 @@ function pintar() {
         </button>
       </div>
     </article>`).join("");
+
+  $("#promo-ofertas").innerHTML = productosEnOferta().map(filaOferta).join("");
 
   const todos = productos();
   $("#promo-categorias").innerHTML = listaCategorias()

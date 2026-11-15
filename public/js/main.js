@@ -41,7 +41,12 @@ function iniciarCabecera() {
   });
   // Sombra de la cabecera al hacer scroll.
   const cab = $(".cabecera");
-  addEventListener("scroll", () => cab.classList.toggle("con-sombra", scrollY > 8), { passive: true });
+  const progreso = $("#progreso");
+  addEventListener("scroll", () => {
+    cab.classList.toggle("con-sombra", scrollY > 8);
+    const max = document.documentElement.scrollHeight - innerHeight;
+    progreso.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
+  }, { passive: true });
   $("#anio").textContent = new Date().getFullYear();
 }
 
