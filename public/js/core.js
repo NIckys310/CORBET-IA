@@ -144,14 +144,25 @@ export function irA(ruta) {
   if (location.hash !== `#${ruta}`) location.hash = ruta;
   else mostrarRuta();
 }
+// Las rutas del panel llevan subsección: #admin:productos, #admin:ia, …
 export function rutaActual() {
-  const r = location.hash.slice(1);
+  const r = location.hash.slice(1).split(":")[0];
   return RUTAS.includes(r) ? r : "inicio";
 }
+export const subRuta = () => location.hash.slice(1).split(":")[1] ?? "";
+export const esModoAdmin = () => document.body.dataset.rol === "admin";
+
 export function mostrarRuta() {
-  const ruta = rutaActual();
+  let ruta = rutaActual();
+  // El panel solo existe para administradores.
+  if (ruta === "admin" && !esModoAdmin()) {
+    history.replaceState(null, "", "#inicio");
+    ruta = "inicio";
+    emitir("accesoDenegado");
+  }
+  const completa = location.hash.slice(1) || "inicio";
   $$(".vista").forEach((v) => (v.hidden = v.dataset.vista !== ruta));
-  $$("[data-ruta]").forEach((a) => a.classList.toggle("activo", a.dataset.ruta === ruta));
+  $$("[data-ruta]").forEach((a) => a.classList.toggle("activo", a.dataset.ruta === completa || (a.dataset.ruta === ruta && !completa.includes(":") && a.dataset.ruta === completa)));
   $("#menu-movil")?.classList.remove("abierto");
   window.scrollTo({ top: 0 });
   emitir("ruta", ruta);
@@ -247,6 +258,33 @@ export function tarjetaProducto(p, { compacta = false } = {}) {
             <button type="button" class="btn btn--negro btn--sm" data-agregar="${escapar(p.sku)}" ${agotado ? "disabled" : ""}>${t("comun.agregar")}</button>
           </span>
         </div>
+      </div>
+    </article>`;
+}
+
+// Cuadro del catálogo (mismo estilo que las promociones, en formato cuadrado).
+export function tarjetaCuadro(p) {
+  const agotado = p.stock != null && p.stock <= 0;
+  const tono = tonoCategoria(p.categoria);
+  return `
+    <article class="cuadro revelar ${p.descuento ? "cuadro--oferta" : ""} ${agotado ? "cuadro--agotado" : ""}" style="--tono:${tono.tono}">
+      <div class="cuadro__media">${imagenProducto(p)}</div>
+      <div class="cuadro__velo"></div>
+      ${p.descuento ? `<span class="cuadro__desc"><small>${t("oferta.dcto")}</small>−${p.descuento}%</span>` : ""}
+      <button type="button" class="cuadro__ia" data-preguntar="${escapar(p.sku)}" title="${t("comun.preguntar")}" aria-label="${t("comun.preguntar")}">✦</button>
+      <div class="cuadro__contenido">
+        <span class="cuadro__marca">${escapar(p.marca)}</span>
+        <h3 class="cuadro__nombre">${escapar(p.nombre)}</h3>
+        <div class="cuadro__precios">
+          <strong>${precio(p.precio)}</strong>
+          ${p.precioAntes ? `<s>${precio(p.precioAntes)}</s>` : ""}
+        </div>
+        ${p.descuento && p.hasta ? `<span class="cuadro__hasta">${terminaPronto(p.hasta)
+          ? `⏳ <span data-cuenta="${p.hasta}">${cuentaRegresiva(p.hasta)}</span>`
+          : t("oferta.hasta", { f: fechaOferta(p.hasta) })}</span>` : ""}
+        <button type="button" class="btn btn--naranja btn--sm cuadro__boton" data-agregar="${escapar(p.sku)}" ${agotado ? "disabled" : ""}>
+          ${agotado ? t("comun.agotado") : `🛒 ${t("comun.agregar")}`}
+        </button>
       </div>
     </article>`;
 }

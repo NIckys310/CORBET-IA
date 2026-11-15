@@ -1,6 +1,7 @@
 // Arranque de CORBET-IA: conecta todos los módulos.
-import { $, estado, aplicarTextos, cambiarIdioma, cambiarTema, mostrarRuta, pedirJSON, emitir, al, revelar, escapar } from "./core.js";
-import { iniciarTienda } from "./tienda.js";
+import { $, estado, aplicarTextos, cambiarIdioma, cambiarTema, mostrarRuta, pedirJSON, emitir, al, revelar, escapar, t, toast } from "./core.js";
+import { iniciarTienda, sesionActual, abrirCuenta } from "./tienda.js";
+import { iniciarVoz } from "./voz.js";
 import { iniciarInicio } from "./inicio.js";
 import { iniciarCatalogo, cargarProductos } from "./catalogo.js";
 import { iniciarPromociones } from "./promociones.js";
@@ -50,15 +51,30 @@ function iniciarCabecera() {
   $("#anio").textContent = new Date().getFullYear();
 }
 
+// Cada rol ve su propio frontend: tienda (invitado / cliente) o panel de administración.
+function aplicarRol(sesion, { redirigir = false } = {}) {
+  const rol = sesion?.rol === "admin" ? "admin" : sesion ? "cliente" : "invitado";
+  document.body.dataset.rol = rol;
+  if (redirigir) location.hash = rol === "admin" ? "admin" : "inicio";
+  mostrarRuta();
+}
+
 aplicarTextos();
 iniciarCabecera();
 iniciarTienda();
+aplicarRol(sesionActual());
+al("sesion", (s) => aplicarRol(s, { redirigir: true }));
+al("accesoDenegado", () => {
+  toast(t("cuenta.soloAdmin"));
+  abrirCuenta();
+});
 iniciarCatalogo();
 iniciarInicio();
 iniciarPromociones();
 iniciarAsistente();
 iniciarSucursales();
 iniciarAdmin();
+iniciarVoz();
 al("idioma", revelar);
 window.addEventListener("hashchange", mostrarRuta);
 mostrarRuta();

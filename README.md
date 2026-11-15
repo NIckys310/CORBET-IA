@@ -19,6 +19,19 @@ npm start
 
 Abre http://localhost:3000 en el navegador.
 
+## Cuentas de prueba
+
+Cada correo abre un frontend diferente:
+
+| Rol | Correo | Contraseña | Qué ve |
+|-----|--------|------------|--------|
+| Administrador | `admin@corbet-ia.test` | `Admin-Corbet-2026` | Panel: resumen y ventas, productos (editar precios, agregar, eliminar), descuentos, **IA de gestión** (chat y voz) y configuración |
+| Cliente | `cliente@corbet-ia.test` | `Cliente-Corbet-2026` | Tienda: inicio, catálogo, promociones, **asistente de compras** (chat, voz y llamada), sucursales, carrito y pedidos |
+
+Son cuentas **solo de prueba** (definidas en `lib/auth.js`). El servidor firma la sesión y la IA de gestión solo responde a un token de administrador. En producción: usar una base de datos de usuarios, cambiar estas contraseñas y definir `AUTH_SECRET` en las variables de entorno.
+
+Los clientes también pueden crear su propia cuenta con "Crear cuenta" (se guarda en su navegador).
+
 ## Estructura
 
 | Parte     | Archivo(s)                     | Ruta           |

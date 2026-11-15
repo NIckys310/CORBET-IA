@@ -34,13 +34,22 @@
         </span>
       </a>
 
+      <span class="etq-admin solo-admin" data-i18n="adm.modo"></span>
+
       <nav id="menu-movil" class="nav" aria-label="Secciones">
-        <a href="#inicio" data-ruta="inicio" data-i18n="nav.inicio"></a>
-        <a href="#catalogo" data-ruta="catalogo" data-i18n="nav.catalogo"></a>
-        <a href="#promociones" data-ruta="promociones" data-i18n="nav.promociones"></a>
-        <a href="#asistente" data-ruta="asistente" data-i18n="nav.asistente"></a>
-        <a href="#sucursales" data-ruta="sucursales" data-i18n="nav.sucursales"></a>
-        <a href="#admin" data-ruta="admin" data-i18n="nav.admin"></a>
+        <!-- Tienda (invitados y clientes) -->
+        <a href="#inicio" data-ruta="inicio" class="solo-tienda" data-i18n="nav.inicio"></a>
+        <a href="#catalogo" data-ruta="catalogo" class="solo-tienda" data-i18n="nav.catalogo"></a>
+        <a href="#promociones" data-ruta="promociones" class="solo-tienda" data-i18n="nav.promociones"></a>
+        <a href="#asistente" data-ruta="asistente" class="solo-tienda" data-i18n="nav.asistente"></a>
+        <a href="#sucursales" data-ruta="sucursales" class="solo-tienda" data-i18n="nav.sucursales"></a>
+        <!-- Administración -->
+        <a href="#admin:resumen" data-ruta="admin:resumen" class="solo-admin" data-i18n="adm.tab.resumen"></a>
+        <a href="#admin:productos" data-ruta="admin:productos" class="solo-admin" data-i18n="adm.tab.productos"></a>
+        <a href="#admin:descuentos" data-ruta="admin:descuentos" class="solo-admin" data-i18n="adm.tab.descuentos"></a>
+        <a href="#admin:ia" data-ruta="admin:ia" class="solo-admin" data-i18n="adm.tab.ia"></a>
+        <a href="#admin:config" data-ruta="admin:config" class="solo-admin" data-i18n="adm.tab.config"></a>
+        <a href="#inicio" data-ruta="inicio" class="solo-admin" data-i18n="adm.verTienda"></a>
       </nav>
 
       <div class="acciones-top">
@@ -183,7 +192,7 @@
               <button id="abrir-conexion" type="button" class="btn btn--negro" data-i18n="cat.conectar"></button>
             </div>
             <div id="cat-activos" class="filtros-activos"></div>
-            <div id="cat-grid" class="grid-productos"></div>
+            <div id="cat-grid" class="grid-cuadros"></div>
           </div>
         </div>
       </div>
@@ -322,6 +331,7 @@
           <button type="button" class="tab activa" data-adm-tab="resumen" data-i18n="adm.tab.resumen"></button>
           <button type="button" class="tab" data-adm-tab="productos" data-i18n="adm.tab.productos"></button>
           <button type="button" class="tab" data-adm-tab="descuentos" data-i18n="adm.tab.descuentos"></button>
+          <button type="button" class="tab" data-adm-tab="ia" data-i18n="adm.tab.ia"></button>
           <button type="button" class="tab" data-adm-tab="config" data-i18n="adm.tab.config"></button>
         </div>
 
@@ -389,6 +399,45 @@
           </div>
         </div>
 
+        <!-- IA de gestión (diferente a la IA de clientes) -->
+        <div class="adm-panel" data-panel="ia" hidden>
+          <div class="asistente">
+            <div class="chat chat--admin" data-chat="admin">
+              <div class="chat__cabeza">
+                <div><strong data-i18n="adm.ia.titulo"></strong> <span class="nota" data-i18n="adm.ia.sub"></span></div>
+                <button class="btn-icono chat__reset" type="button" data-i18n-title="asis.nueva">↺</button>
+              </div>
+              <div class="chat__mensajes" aria-live="polite">
+                <div class="chat__vacio">
+                  <img src="logo.svg" alt="" width="56" height="56" />
+                  <h3 class="titulo-display" data-i18n="adm.ia.hola"></h3>
+                  <div class="chips">
+                    <button type="button" class="chip" data-i18n="adm.ia.s1"></button>
+                    <button type="button" class="chip" data-i18n="adm.ia.s2"></button>
+                    <button type="button" class="chip" data-i18n="adm.ia.s3"></button>
+                    <button type="button" class="chip" data-i18n="adm.ia.s4"></button>
+                  </div>
+                </div>
+              </div>
+              <form class="chat__form">
+                <textarea rows="1" data-i18n-placeholder="adm.ia.placeholder" autocomplete="off"></textarea>
+                <button class="btn btn--negro" type="submit" data-i18n="asis.enviar"></button>
+              </form>
+            </div>
+            <aside class="asistente__lado">
+              <div class="panel-lateral">
+                <h3 data-i18n="adm.ia.diferencias"></h3>
+                <ul class="lista-puntos">
+                  <li data-i18n="adm.ia.d1"></li>
+                  <li data-i18n="adm.ia.d2"></li>
+                  <li data-i18n="adm.ia.d3"></li>
+                  <li data-i18n="adm.ia.d4"></li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+        </div>
+
         <!-- Configuración -->
         <div class="adm-panel" data-panel="config" hidden>
           <form id="form-config" class="tarjeta-dash form form--config">
@@ -452,20 +501,40 @@
   </aside>
 
   <!-- ================= Diálogos ================= -->
-  <dialog id="dlg-cuenta" class="dialogo">
-    <div id="cuenta-invitado">
-      <div class="segmentos segmentos--ancho">
-        <button type="button" class="segmento pestana activa" data-modo="ingresar" data-i18n="cuenta.ingresar"></button>
-        <button type="button" class="segmento pestana" data-modo="registrar" data-i18n="cuenta.registrarse"></button>
+  <dialog id="dlg-cuenta" class="dialogo dialogo--login">
+    <div id="cuenta-invitado" class="login">
+      <div class="login__marca" aria-hidden="true">
+        <img src="logo.svg" alt="" width="64" height="64" />
+        <h2 class="titulo-display">CORBET<span class="marca__ia">IA</span></h2>
+        <p data-i18n="cuenta.lema"></p>
+        <ul>
+          <li data-i18n="cuenta.b1"></li>
+          <li data-i18n="cuenta.b2"></li>
+          <li data-i18n="cuenta.b3"></li>
+        </ul>
       </div>
-      <form id="form-cuenta" class="form">
-        <label id="campo-nombre" hidden><span data-i18n="cuenta.nombre"></span><input id="cuenta-nombre" autocomplete="name" /></label>
-        <label><span data-i18n="cuenta.correo"></span><input id="cuenta-correo" type="email" autocomplete="email" required /></label>
-        <label><span data-i18n="cuenta.clave"></span><input id="cuenta-clave" type="password" autocomplete="current-password" required minlength="6" /></label>
-        <p id="cuenta-error" class="resultado resultado--error" role="alert"></p>
-        <button id="cuenta-enviar" class="btn btn--negro ancho" type="submit"></button>
+      <div class="login__form">
+        <button type="button" class="btn-icono login__cerrar cerrar-dialogo" aria-label="Cerrar">✕</button>
+        <h2 class="titulo-display" data-i18n="cuenta.bienvenido"></h2>
+        <p class="nota" data-i18n="cuenta.sub"></p>
+        <div class="segmentos segmentos--ancho">
+          <button type="button" class="segmento pestana activa" data-modo="ingresar" data-i18n="cuenta.ingresar"></button>
+          <button type="button" class="segmento pestana" data-modo="registrar" data-i18n="cuenta.registrarse"></button>
+        </div>
+        <form id="form-cuenta" class="form">
+          <label id="campo-nombre" hidden><span data-i18n="cuenta.nombre"></span><input id="cuenta-nombre" autocomplete="name" /></label>
+          <label><span data-i18n="cuenta.correo"></span><input id="cuenta-correo" type="email" autocomplete="email" required /></label>
+          <label><span data-i18n="cuenta.clave"></span><input id="cuenta-clave" type="password" autocomplete="current-password" required minlength="6" /></label>
+          <p id="cuenta-error" class="resultado resultado--error" role="alert"></p>
+          <button id="cuenta-enviar" class="btn btn--negro ancho" type="submit"></button>
+        </form>
+        <div class="login__demo">
+          <span data-i18n="cuenta.demo"></span>
+          <button type="button" class="chip" data-cuenta-demo="admin@corbet-ia.test">👑 admin@corbet-ia.test</button>
+          <button type="button" class="chip" data-cuenta-demo="cliente@corbet-ia.test">🛍️ cliente@corbet-ia.test</button>
+        </div>
         <p class="nota" data-i18n="cuenta.aviso"></p>
-      </form>
+      </div>
     </div>
     <div id="cuenta-usuario" hidden>
       <h2 id="cuenta-saludo" class="titulo-display"></h2>
@@ -524,6 +593,18 @@
     <p class="nota" data-i18n="pie.creditosTexto"></p>
     <ul id="lista-creditos" class="creditos"></ul>
     <div class="fila-botones"><span class="espacio"></span><button type="button" class="btn btn--negro cerrar-dialogo" data-i18n="comun.cerrar"></button></div>
+  </dialog>
+
+  <!-- Llamada con el asistente (voz) -->
+  <dialog id="dlg-llamada" class="llamada" data-estado="escuchando">
+    <span id="llamada-tiempo" class="llamada__tiempo">00:00</span>
+    <h2 id="llamada-titulo" class="titulo-display"></h2>
+    <div class="llamada__orbe" aria-hidden="true"><span></span><span></span><span></span><img src="logo.svg" alt="" /></div>
+    <p id="llamada-estado" class="llamada__estado" role="status"></p>
+    <p id="llamada-texto" class="llamada__texto"></p>
+    <button id="colgar" type="button" class="llamada__colgar" data-i18n-title="voz.colgar">
+      <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15c5-5 13-5 18 0l-2 3-4-1v-3a10 10 0 0 0-6 0v3l-4 1z"/></svg>
+    </button>
   </dialog>
 
   <div id="toast" class="toast" role="status"></div>

@@ -1,7 +1,11 @@
 // Sección Administración: dashboard (KPIs y gráficas de ventas), gestión de productos, descuentos y configuración.
 import { $, $$, t, loc, escapar, al, emitir, toast, almacen, estado, precio, productos, ajustes, guardarAjustes,
-  configuracion, nombreCategoria, listaCategorias, aplicarTextos, pedirJSON } from "./core.js";
-import { todosLosPedidos } from "./tienda.js";
+  configuracion, nombreCategoria, listaCategorias, aplicarTextos, pedirJSON, rutaActual, subRuta } from "./core.js";
+import { todosLosPedidos, sesionActual } from "./tienda.js";
+import { crearChat } from "./asistente.js";
+
+const PESTANAS = ["resumen", "productos", "descuentos", "ia", "config"];
+const enPanel = () => rutaActual() === "admin";
 
 let pestana = "resumen";
 const graficas = {};
@@ -283,11 +287,19 @@ export async function cargarVentas() {
   } catch {
     estado.ventas = null;
   }
-  if (location.hash === "#admin") pintar();
+  if (enPanel()) pintar();
 }
 
 export function iniciarAdmin() {
-  $$("[data-adm-tab]").forEach((b) => b.addEventListener("click", () => mostrarPestana(b.dataset.admTab)));
+  // Las pestañas cambian la URL (#admin:productos) para que la barra del administrador las enlace.
+  $$("[data-adm-tab]").forEach((b) => b.addEventListener("click", () => (location.hash = `admin:${b.dataset.admTab}`)));
+
+  // IA de gestión (solo administradores): chat + voz, con el token de la sesión.
+  crearChat($('[data-chat="admin"]'), {
+    modo: "admin", ruta: "admin:ia", voz: true, titulo: "CORBET-IA Gestión",
+    cabeceras: () => (sesionActual()?.token ? { Authorization: `Bearer ${sesionActual().token}` } : {}),
+    cuerpoExtra: () => ({ pedidos: todosLosPedidos().slice(0, 30) }),
+  });
   $$("[data-tabla]").forEach((b) => b.addEventListener("click", () => {
     vistaTabla[b.dataset.tabla] = !vistaTabla[b.dataset.tabla];
     aplicarVistaTabla();
@@ -335,9 +347,13 @@ export function iniciarAdmin() {
     toast(t("adm.c.restaurado"));
   });
 
-  al("ruta", (r) => r === "admin" && pintar());
-  al("productos", () => location.hash === "#admin" && pintar());
-  al("pedidos", () => location.hash === "#admin" && pintar());
-  al("idioma", () => location.hash === "#admin" && pintar());
-  al("tema", () => location.hash === "#admin" && pestana === "resumen" && requestAnimationFrame(pintarGraficas));
+  al("ruta", (r) => {
+    if (r !== "admin") return;
+    const sub = subRuta();
+    mostrarPestana(PESTANAS.includes(sub) ? sub : "resumen");
+  });
+  al("productos", () => enPanel() && pintar());
+  al("pedidos", () => enPanel() && pintar());
+  al("idioma", () => enPanel() && pintar());
+  al("tema", () => enPanel() && pestana === "resumen" && requestAnimationFrame(pintarGraficas));
 }

@@ -106,16 +106,44 @@ export function todosLosPedidos() {
 // =====================================================================
 // Cuentas
 // =====================================================================
+// Sesión: { correo, nombre, rol: "admin" | "cliente", token? }.
+// Las cuentas de prueba (admin y cliente) se validan en el servidor (/api/login) y reciben un token firmado.
+// Las cuentas que crea un cliente con "Crear cuenta" se guardan solo en este navegador (rol cliente).
 let modo = "ingresar";
-let sesion = almacen.leer("sesion");
+let sesion = (() => {
+  const s = almacen.leer("sesion");
+  return s && typeof s === "object" ? s : null; // formato antiguo (solo correo) → sin sesión
+})();
 
 async function hashClave(correo, clave) {
   const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(`corbet-ia:${correo}:${clave}`));
   return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
+export const sesionActual = () => sesion;
+export const esAdmin = () => sesion?.rol === "admin";
+
+// Datos locales del usuario (pedidos), creados si no existen.
 export function usuarioActual() {
-  return sesion ? almacen.leer("usuarios", {})[sesion] ?? null : null;
+  if (!sesion) return null;
+  const usuarios = almacen.leer("usuarios", {});
+  if (!usuarios[sesion.correo]) {
+    usuarios[sesion.correo] = { nombre: sesion.nombre, correo: sesion.correo, pedidos: [] };
+    almacen.guardar("usuarios", usuarios);
+  }
+  return usuarios[sesion.correo];
+}
+
+function abrirSesion(s) {
+  sesion = s;
+  almacen.guardar("sesion", s);
+  emitir("sesion", s);
+}
+
+export function cerrarSesion() {
+  sesion = null;
+  almacen.guardar("sesion", null);
+  emitir("sesion", null);
 }
 
 function pintarCuenta() {
@@ -125,7 +153,7 @@ function pintarCuenta() {
   $("#cuenta-usuario").hidden = !u;
   if (!u) return;
   $("#cuenta-saludo").textContent = t("cuenta.hola", { n: u.nombre });
-  $("#cuenta-correo-txt").textContent = u.correo;
+  $("#cuenta-correo-txt").textContent = `${u.correo} · ${t(esAdmin() ? "cuenta.rolAdmin" : "cuenta.rolCliente")}`;
   const f = new Intl.DateTimeFormat(estado.idioma === "en" ? "en-US" : "es-CO", { dateStyle: "medium", timeStyle: "short" });
   $("#cuenta-pedidos").innerHTML = u.pedidos.length
     ? u.pedidos.map((p) => `
@@ -160,18 +188,38 @@ async function enviarCuenta(e) {
   const error = $("#cuenta-error");
   const usuarios = almacen.leer("usuarios", {});
   if (!correo || clave.length < 6 || (modo === "registrar" && !nombre)) return (error.textContent = t("cuenta.err.datos"));
-  const hash = await hashClave(correo, clave);
-  if (modo === "registrar") {
-    if (usuarios[correo]) return (error.textContent = t("cuenta.err.existe"));
-    usuarios[correo] = { nombre, correo, hash, pedidos: [] };
+  const boton = $("#cuenta-enviar");
+  boton.disabled = true;
+  try {
+    if (modo === "ingresar") {
+      // 1) Cuentas del servidor (administrador / cliente de prueba)
+      const res = await fetch("/api/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ correo, clave }) });
+      if (res.ok) {
+        const { usuario, token } = await res.json();
+        abrirSesion({ ...usuario, token });
+        return terminarIngreso(t(usuario.rol === "admin" ? "cuenta.ok.admin" : "cuenta.ok.ingreso"));
+      }
+      if (res.status === 401) return (error.textContent = t("cuenta.err.credenciales"));
+      // 2) Cuentas creadas en este navegador
+      const hash = await hashClave(correo, clave);
+      if (usuarios[correo]?.hash !== hash) return (error.textContent = t("cuenta.err.credenciales"));
+      abrirSesion({ correo, nombre: usuarios[correo].nombre, rol: "cliente" });
+      return terminarIngreso(t("cuenta.ok.ingreso"));
+    }
+    if (usuarios[correo] || correo.endsWith("@corbet-ia.test")) return (error.textContent = t("cuenta.err.existe"));
+    usuarios[correo] = { nombre, correo, hash: await hashClave(correo, clave), pedidos: [] };
     almacen.guardar("usuarios", usuarios);
-    toast(t("cuenta.ok.creada"));
-  } else {
-    if (usuarios[correo]?.hash !== hash) return (error.textContent = t("cuenta.err.credenciales"));
-    toast(t("cuenta.ok.ingreso"));
+    abrirSesion({ correo, nombre, rol: "cliente" });
+    terminarIngreso(t("cuenta.ok.creada"));
+  } catch {
+    error.textContent = t("asis.errorConexion");
+  } finally {
+    boton.disabled = false;
   }
-  sesion = correo;
-  almacen.guardar("sesion", correo);
+}
+
+function terminarIngreso(mensaje) {
+  toast(mensaje);
   $("#form-cuenta").reset();
   $("#dlg-cuenta").close();
   pintarCuenta();
@@ -198,11 +246,16 @@ export function iniciarTienda() {
   $$(".pestana[data-modo]").forEach((p) => p.addEventListener("click", () => cambiarModo(p.dataset.modo)));
   $("#form-cuenta").addEventListener("submit", enviarCuenta);
   $("#cuenta-salir").addEventListener("click", () => {
-    sesion = null;
-    almacen.guardar("sesion", null);
+    cerrarSesion();
     pintarCuenta();
     $("#dlg-cuenta").close();
   });
+  // Rellena el formulario con una cuenta de prueba (solo el correo; la contraseña está en el README).
+  $$("[data-cuenta-demo]").forEach((b) => b.addEventListener("click", () => {
+    cambiarModo("ingresar");
+    $("#cuenta-correo").value = b.dataset.cuentaDemo;
+    $("#cuenta-clave").focus();
+  }));
 
   // Botón "Agregar" en cualquier tarjeta de producto.
   document.addEventListener("click", (e) => {

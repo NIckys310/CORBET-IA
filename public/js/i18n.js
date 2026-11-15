@@ -25,6 +25,27 @@ export const TEXTOS = {
     "ofertas.comprar": "Comprar con descuento", "ofertas.ticker": "{n} −{d}% hasta el {f}",
     "ofertas.contador": "{n} productos en oferta · ahorra hasta {d}%",
 
+    // Voz
+    "voz.dictar": "Hablar (dictado)", "voz.leer": "Leer respuestas en voz alta", "voz.leerOn": "Las respuestas se leerán en voz alta",
+    "voz.leerOff": "Lectura en voz alta desactivada", "voz.llamar": "Llamar", "voz.colgar": "Colgar",
+    "voz.escuchando": "Te escucho…", "voz.pensando": "Pensando…", "voz.hablando": "Respondiendo…", "voz.error": "No se pudo continuar la llamada.",
+    "voz.saludo": "Hola, soy CORBET-IA. ¿En qué te ayudo?", "voz.noSoportado": "Tu navegador no permite el reconocimiento de voz. Usa Chrome o Edge.",
+    "voz.sinPermiso": "Permite el acceso al micrófono para hablar con el asistente.",
+
+    // Roles
+    "adm.modo": "Administrador", "adm.tab.ia": "IA de gestión", "adm.verTienda": "Ver tienda",
+    "adm.ia.titulo": "CORBET-IA Gestión", "adm.ia.sub": "Solo para administradores", "adm.ia.hola": "¿Qué analizamos hoy?",
+    "adm.ia.placeholder": "Pregunta por ventas, stock, precios o descuentos…",
+    "adm.ia.s1": "¿Qué productos debo reponer primero?", "adm.ia.s2": "¿Qué categoría vendió más este mes?",
+    "adm.ia.s3": "Sugiere precios para los televisores", "adm.ia.s4": "¿Qué descuentos vencen esta semana?",
+    "adm.ia.diferencias": "En qué se diferencia", "adm.ia.d1": "Ve ventas, stock bajo y pedidos de la tienda.",
+    "adm.ia.d2": "Sugiere precios y descuentos con el SKU exacto para editar.", "adm.ia.d3": "Solo responde con una sesión de administrador (verificada en el servidor).",
+    "adm.ia.d4": "También funciona por voz y en llamada.",
+    "cuenta.lema": "Tu asistente inteligente de compras.", "cuenta.b1": "Ofertas con fecha límite", "cuenta.b2": "Asistente por chat y voz",
+    "cuenta.b3": "Pedidos y cuenta en un solo lugar", "cuenta.bienvenido": "Bienvenido", "cuenta.sub": "Ingresa con tu correo para continuar.",
+    "cuenta.demo": "Cuentas de prueba:", "cuenta.ok.admin": "Sesión de administrador iniciada.", "cuenta.soloAdmin": "Esa sección es solo para administradores.",
+    "cuenta.rolAdmin": "Administrador", "cuenta.rolCliente": "Cliente",
+
     // Inicio
     "inicio.verPromo": "Ver promoción", "inicio.hablar": "Hablar con el asistente",
     "inicio.accesos": "Accesos al sistema", "inicio.accesos.sub": "Todo CORBET-IA en un clic",
@@ -157,6 +178,25 @@ export const TEXTOS = {
     "ofertas.titulo": "Season deals", "ofertas.sub": "Detailed discounts per product, with their end date.",
     "ofertas.comprar": "Buy at a discount", "ofertas.ticker": "{n} −{d}% until {f}",
     "ofertas.contador": "{n} products on sale · save up to {d}%",
+
+    "voz.dictar": "Speak (dictation)", "voz.leer": "Read replies aloud", "voz.leerOn": "Replies will be read aloud",
+    "voz.leerOff": "Read-aloud turned off", "voz.llamar": "Call", "voz.colgar": "Hang up",
+    "voz.escuchando": "Listening…", "voz.pensando": "Thinking…", "voz.hablando": "Replying…", "voz.error": "The call couldn't continue.",
+    "voz.saludo": "Hi, I'm CORBET-IA. How can I help?", "voz.noSoportado": "Your browser doesn't support speech recognition. Use Chrome or Edge.",
+    "voz.sinPermiso": "Allow microphone access to talk to the assistant.",
+
+    "adm.modo": "Admin", "adm.tab.ia": "Management AI", "adm.verTienda": "View store",
+    "adm.ia.titulo": "CORBET-IA Management", "adm.ia.sub": "Admins only", "adm.ia.hola": "What should we analyze today?",
+    "adm.ia.placeholder": "Ask about sales, stock, prices or discounts…",
+    "adm.ia.s1": "Which products should I restock first?", "adm.ia.s2": "Which category sold the most this month?",
+    "adm.ia.s3": "Suggest prices for the TVs", "adm.ia.s4": "Which discounts end this week?",
+    "adm.ia.diferencias": "How it's different", "adm.ia.d1": "Sees sales, low stock and store orders.",
+    "adm.ia.d2": "Suggests prices and discounts with the exact SKU to edit.", "adm.ia.d3": "Only answers an admin session (checked on the server).",
+    "adm.ia.d4": "Also works by voice and as a call.",
+    "cuenta.lema": "Your smart shopping assistant.", "cuenta.b1": "Deals with end dates", "cuenta.b2": "Chat and voice assistant",
+    "cuenta.b3": "Orders and account in one place", "cuenta.bienvenido": "Welcome", "cuenta.sub": "Sign in with your email to continue.",
+    "cuenta.demo": "Test accounts:", "cuenta.ok.admin": "Admin session started.", "cuenta.soloAdmin": "That section is for admins only.",
+    "cuenta.rolAdmin": "Admin", "cuenta.rolCliente": "Customer",
 
     "inicio.verPromo": "See deal", "inicio.hablar": "Talk to the assistant",
     "inicio.accesos": "Quick access", "inicio.accesos.sub": "All of CORBET-IA in one click",

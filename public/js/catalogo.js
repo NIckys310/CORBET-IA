@@ -1,5 +1,5 @@
 // Sección Catálogo: productos con filtros (categoría, marca, precio, descuento, disponibilidad) y conexión a base de datos.
-import { $, t, escapar, al, estado, almacen, productos, tarjetaProducto, nombreCategoria, listaCategorias,
+import { $, t, escapar, al, estado, almacen, productos, tarjetaCuadro, nombreCategoria, listaCategorias,
   pedirProductos, aplicarProductos, revelar, irA, registrarVisto } from "./core.js";
 
 const filtros = { texto: "", categorias: new Set(), marcas: new Set(), min: null, max: null, soloDesc: false, soloDisp: false, orden: "relevancia" };
@@ -69,7 +69,7 @@ function aplicarFiltros() {
 
 function pintarResultados() {
   const lista = aplicarFiltros();
-  $("#cat-grid").innerHTML = lista.map((p) => tarjetaProducto(p)).join("") || `<p class="vacio">${t("cat.vacio")}</p>`;
+  $("#cat-grid").innerHTML = lista.map((p) => tarjetaCuadro(p)).join("") || `<p class="vacio">${t("cat.vacio")}</p>`;
   $("#cat-resultados").textContent = t("cat.resultados", { n: lista.length, t: productos().length });
   // Chips de filtros activos
   const activos = [

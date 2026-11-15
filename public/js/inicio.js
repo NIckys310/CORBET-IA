@@ -1,6 +1,6 @@
 // Sección Inicio: banner de promociones, accesos al sistema, destacados, categorías y recomendaciones.
 import { $, t, loc, escapar, al, estado, productos, promocionesVisibles, tarjetaProducto, nombreCategoria, tonoCategoria,
-  imagenProducto, listaCategorias, cuentaRegresiva, revelar, irA, filaOferta, productosEnOferta, pintarTicker } from "./core.js";
+  imagenProducto, listaCategorias, cuentaRegresiva, revelar, irA, filaOferta, productosEnOferta, pintarTicker, esModoAdmin } from "./core.js";
 import { skusEnCarrito, abrirCuenta } from "./tienda.js";
 import { filtrarCatalogo } from "./catalogo.js";
 
@@ -63,7 +63,8 @@ function reiniciarTemporizador() {
 }
 
 function pintarAccesos() {
-  $("#accesos").innerHTML = ACCESOS.map((a) => `
+  // El acceso al panel solo aparece para administradores.
+  $("#accesos").innerHTML = ACCESOS.filter((a) => a.ruta !== "admin" || esModoAdmin()).map((a) => `
     <button type="button" class="acceso revelar" ${a.ruta ? `data-ir="${a.ruta}"` : `data-accion="${a.accion}"`}>
       <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">${a.icono}</svg>
       <strong>${t(a.t)}</strong>
@@ -142,6 +143,7 @@ export function iniciarInicio() {
   al("promociones", pintarTodo);
   al("idioma", pintarTodo);
   al("carrito", pintarProductos);
+  al("sesion", pintarTodo);
   pintarTodo();
   reiniciarTemporizador();
 }
