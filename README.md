@@ -21,12 +21,21 @@ Abre http://localhost:3000 en el navegador.
 
 ## Estructura
 
+| Parte     | Archivo(s)                     | Ruta           |
+|-----------|--------------------------------|----------------|
+| Frontend  | `public/` (HTML, CSS, JS)      | `/`            |
+| Backend   | `lib/backend.js`, `api/backend.js` | `/api/backend` (estado del servicio) |
+| IA        | `lib/ia.js`, `api/ia.js`       | `/api/ia` (GET info, POST chat en streaming) |
+
+`dev-server.js` es el servidor local (Express). En Vercel, `public/` se sirve como sitio estático y `api/` como funciones serverless.
+
+## Despliegue en Vercel
+
+```bash
+vercel --prod
 ```
-server.js          Servidor Express y endpoint /api/chat (streaming)
-public/index.html  Interfaz del chat
-public/styles.css  Estilos (modo claro/oscuro)
-public/app.js      Lógica del cliente
-```
+
+En Vercel → Project → Settings → Environment Variables, añade `ANTHROPIC_API_KEY` y vuelve a desplegar.
 
 ## Configuración
 
@@ -35,7 +44,7 @@ public/app.js      Lógica del cliente
 | `ANTHROPIC_API_KEY` | Clave de la API de Anthropic        |
 | `PORT`              | Puerto del servidor (por defecto 3000) |
 
-El modelo usado es `claude-opus-5-5`. La personalidad del asistente se define en `SYSTEM_PROMPT` dentro de `server.js`.
+El modelo usado es `claude-opus-5-5`. La personalidad del asistente se define en `SYSTEM_PROMPT` dentro de `lib/ia.js`.
 
 ## Licencia
 
