@@ -925,3 +925,61 @@ body[data-rol="admin"] .vista[data-vista="admin"] .tabs { display: none; } /* la
 .titulo-display .marca__ia, .login__marca .marca__ia { font-size: .5em; vertical-align: .35em; }
 .login__marca h2 { font-family: "Montserrat", var(--texto-fam); font-weight: 600; letter-spacing: .14em; font-size: 38px; }
 .pie .marca__nombre { font-size: 18px; }
+
+/* =====================================================================
+   Logo CORBET-IA definitivo (opción 10): ícono redondeado + CORBET·IA en serif
+   ===================================================================== */
+.marca img { width: 44px; height: 44px; border-radius: 11px; box-shadow: 0 6px 18px rgba(10, 31, 143, .25); }
+.marca .logo-blanco { display: none !important; }
+.marca .logo-color { display: block !important; }
+.marca__nombre {
+  font-family: var(--display); font-weight: 700; font-size: 26px; letter-spacing: .1em; line-height: 1;
+  color: #0B1F8F; display: inline-flex; align-items: baseline;
+}
+:root[data-theme="dark"] .marca__nombre, body[data-rol="admin"] .cabecera .marca__nombre { color: #fff; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .marca__nombre { color: #fff; } }
+.marca__ia {
+  margin: 0; padding: 0; background: none; box-shadow: none; border-radius: 0;
+  color: var(--naranja); font-family: var(--display); font-size: 1em; font-weight: 700; letter-spacing: .1em; vertical-align: baseline;
+}
+.marca__ia::before { content: "·"; margin: 0 .05em; }
+.marca__ia::after { content: none; }
+.marca__lema { position: relative; margin-top: 7px; padding-top: 5px; letter-spacing: .3em; }
+.marca__lema::before {
+  content: ""; position: absolute; left: 0; right: 18%; top: 0; height: 2px; border-radius: 2px;
+  background: #3FD9C4; opacity: .85;
+}
+.titulo-display .marca__ia, .login__marca .marca__ia { font-size: 1em; vertical-align: baseline; }
+.login__marca img { width: 88px; height: 88px; border-radius: 22px; }
+.login__marca h2 { font-family: var(--display); font-weight: 700; letter-spacing: .1em; font-size: 44px; }
+.llamada__orbe img { border-radius: 20px; }
+
+/* =====================================================================
+   Asistente: columna principal (chat + contactos) y contactos del equipo
+   ===================================================================== */
+.asistente__principal { display: flex; flex-direction: column; gap: 32px; min-width: 0; }
+.asistente__principal .chat { margin-bottom: 0; }
+.contactos {
+  background: var(--superficie); border: 1px solid var(--linea); border-radius: var(--radio); padding: 32px;
+  position: relative; overflow: hidden;
+}
+.contactos::before { content: ""; position: absolute; left: 0; top: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--azul), var(--naranja), var(--turq, #3FD9C4)); }
+.contactos__cabeza { margin-bottom: 24px; }
+.contactos__cabeza h2 { font-size: 34px; margin: 6px 0 6px; }
+.contactos__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 18px; }
+.contacto {
+  display: grid; grid-template-columns: 52px 1fr; gap: 14px; align-items: start; padding: 18px; border-radius: 16px;
+  background: var(--beige); border: 1px solid transparent; transition: transform .3s ease, border-color .3s, box-shadow .3s;
+}
+.contacto:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--naranja) 40%, var(--linea)); box-shadow: var(--sombra); }
+.contacto__avatar {
+  width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 17px;
+  background: var(--c); box-shadow: 0 6px 16px color-mix(in srgb, var(--c) 40%, transparent);
+}
+.contacto__info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.contacto__info strong { font-size: 15px; }
+.contacto__rol { font-size: 12px; font-weight: 700; color: var(--naranja-osc); letter-spacing: .02em; }
+:root[data-theme="dark"] .contacto__rol { color: var(--naranja); }
+.contacto__correo { font-size: 13px; color: var(--azul); word-break: break-all; text-decoration: underline; text-underline-offset: 3px; }
+:root[data-theme="dark"] .contacto__correo { color: #7fa6ff; }
+.contacto__boton { grid-column: 1 / -1; justify-self: start; }

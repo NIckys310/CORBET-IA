@@ -25,6 +25,12 @@ export const TEXTOS = {
     "ofertas.comprar": "Comprar con descuento", "ofertas.ticker": "{n} −{d}% hasta el {f}",
     "ofertas.contador": "{n} productos en oferta · ahorra hasta {d}%",
 
+    // Contactos
+    "cont.etq": "Equipo CORBET-IA", "cont.titulo": "Contactos del equipo",
+    "cont.sub": "Escríbele directamente a la persona encargada de cada área.",
+    "cont.ext": "Ext. {e}", "cont.escribir": "Escribir",
+    "cont.aviso": "Contactos de demostración: los nombres y correos son ficticios.",
+
     // Voz
     "voz.dictar": "Hablar (dictado)", "voz.leer": "Leer respuestas en voz alta", "voz.leerOn": "Las respuestas se leerán en voz alta",
     "voz.leerOff": "Lectura en voz alta desactivada", "voz.llamar": "Llamar", "voz.colgar": "Colgar",
@@ -178,6 +184,11 @@ export const TEXTOS = {
     "ofertas.titulo": "Season deals", "ofertas.sub": "Detailed discounts per product, with their end date.",
     "ofertas.comprar": "Buy at a discount", "ofertas.ticker": "{n} −{d}% until {f}",
     "ofertas.contador": "{n} products on sale · save up to {d}%",
+
+    "cont.etq": "CORBET-IA team", "cont.titulo": "Team contacts",
+    "cont.sub": "Write directly to the person in charge of each area.",
+    "cont.ext": "Ext. {e}", "cont.escribir": "Email",
+    "cont.aviso": "Demo contacts: names and emails are fictional.",
 
     "voz.dictar": "Speak (dictation)", "voz.leer": "Read replies aloud", "voz.leerOn": "Replies will be read aloud",
     "voz.leerOff": "Read-aloud turned off", "voz.llamar": "Call", "voz.colgar": "Hang up",

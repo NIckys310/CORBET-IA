@@ -27,7 +27,7 @@
   <header class="cabecera">
     <div class="contenedor cabecera__fila">
       <a href="#inicio" class="marca" aria-label="CORBET-IA">
-        <img class="logo-color" src="logo.svg" alt="" width="46" height="39" /><img class="logo-blanco" src="logo-blanco.svg" alt="" width="46" height="39" />
+        <img class="logo-color" src="logo.svg" alt="" width="44" height="44" /><img class="logo-blanco" src="logo-blanco.svg" alt="" width="44" height="44" />
         <span class="marca__texto">
           <span class="marca__nombre">CORBET<span class="marca__ia">IA</span></span>
           <span class="marca__lema" data-i18n="marca.lema"></span>
@@ -227,6 +227,7 @@
         </header>
 
         <div class="asistente">
+          <div class="asistente__principal">
           <div class="chat" data-chat="productos">
             <div class="chat__cabeza">
               <div class="segmentos">
@@ -252,6 +253,20 @@
               <textarea rows="1" data-i18n-placeholder="asis.placeholder" autocomplete="off"></textarea>
               <button class="btn btn--negro" type="submit" data-i18n="asis.enviar"></button>
             </form>
+          </div>
+
+          <!-- Contactos del equipo (ocupa el espacio bajo el chat) -->
+          <section class="contactos" aria-labelledby="contactos-titulo">
+            <header class="contactos__cabeza">
+              <div>
+                <span class="sobretitulo" data-i18n="cont.etq"></span>
+                <h2 id="contactos-titulo" class="titulo-display" data-i18n="cont.titulo"></h2>
+                <p class="nota" data-i18n="cont.sub"></p>
+              </div>
+            </header>
+            <div id="lista-contactos" class="contactos__grid"></div>
+            <p class="nota" data-i18n="cont.aviso"></p>
+          </section>
           </div>
 
           <aside class="asistente__lado">
@@ -504,7 +519,7 @@
   <dialog id="dlg-cuenta" class="dialogo dialogo--login">
     <div id="cuenta-invitado" class="login">
       <div class="login__marca" aria-hidden="true">
-        <img src="logo-blanco.svg" alt="" width="84" height="71" />
+        <img src="logo-blanco.svg" alt="" width="88" height="88" />
         <h2 class="titulo-display">CORBET<span class="marca__ia">IA</span></h2>
         <p data-i18n="cuenta.lema"></p>
         <ul>

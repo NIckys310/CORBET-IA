@@ -2,6 +2,7 @@
 import { $, estado, aplicarTextos, cambiarIdioma, cambiarTema, mostrarRuta, pedirJSON, emitir, al, revelar, escapar, t, toast } from "./core.js";
 import { iniciarTienda, sesionActual, abrirCuenta } from "./tienda.js";
 import { iniciarVoz } from "./voz.js";
+import { iniciarContactos } from "./contactos.js";
 import { iniciarInicio } from "./inicio.js";
 import { iniciarCatalogo, cargarProductos } from "./catalogo.js";
 import { iniciarPromociones } from "./promociones.js";
@@ -75,6 +76,7 @@ iniciarAsistente();
 iniciarSucursales();
 iniciarAdmin();
 iniciarVoz();
+iniciarContactos();
 al("idioma", revelar);
 window.addEventListener("hashchange", mostrarRuta);
 mostrarRuta();
